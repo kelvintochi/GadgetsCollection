@@ -1,0 +1,97 @@
+﻿@model IEnumerable<GadgetsCollection.Models.Gadget>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <input id="myInput" type="text" placeholder="Search.." />
+</div>
+<br />
+<br />
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Image")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+               <a asp-action="AddOrEdit" class="btn btn-sm btn-success" style="width:92px !important">
+                   <i class="fa-solid fa-plus"></i>
+                   New
+               </a>
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+
+                <td>
+                    <form asp-action="Delete" asp-route-id=" @item.GadgetId">
+                        <div class="btn-group btn-group-sm">
+                            <a asp-action="Edit" asp-route-id="@item.GadgetId" class="btn btn-warning">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-id="@item.GadgetId" class="btn btn-info">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm(" Are you sure? ,you want to delete the selected Record")">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
